@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+     matchLabels:
+         app: web-server
+  template:
+    metadata:
+      labels:
+        app: web-server
+        version: "1.0"
+    spec:
+      containers:
+        - name: web-server
+          image: 192.168.1.55:8085/1.19-pipeline:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+           - name: regsecret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: web-server
+spec:
+ type: LoadBalancer
+ selector:
+   app: web-server
+   version: "1.0"
+ ports:
+ - port: 8080
+   targetPort: 8080
+   protocol: TCP
