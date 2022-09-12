@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: web-server
-          image: 192.168.1.55:8085/1.19-pipeline:latest
+          image: 192.168.152.130/holder/mine-project:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -31,7 +31,7 @@ kind: Service
 metadata:
  name: web-server
 spec:
- type: LoadBalancer
+ type: NodePort
  selector:
    app: web-server
    version: "1.0"
