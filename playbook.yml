@@ -17,12 +17,12 @@ spec:
     spec:
       containers:
         - name: web-server
-          image: 192.168.152.130/holder/mine-project:latest
+          image:  master.mine.com/holder/mine-project:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
       imagePullSecrets:
-           - name: regsecret
+           - name: docker-registry
 
 ---
 
